@@ -28,6 +28,15 @@ function createPromise(position, delay) {
 }
 
 function generatePromises(delay, step, amount) {
+  if (delay < 0 || step < 0 || amount < 0) {
+    return (
+      Notiflix.Notify.warning('⚠️ Field value cannot be less than 0'),
+      {
+        timeout: 5000,
+      }
+    );
+  }
+
   for (let i = 1; i <= amount; i += 1) {
     createPromise(i, delay)
       .then(({ position, delay }) => {
